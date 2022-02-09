@@ -114,7 +114,7 @@ public final class Constraint {
                         case .bottom:
                             layoutToAttribute = .bottomMargin
                         default:
-                            fatalError()
+                            preconditionFailure()
                         }
                     } else if self.from.attributes == .margins && self.to.attributes == .edges {
                         switch layoutFromAttribute {
@@ -127,7 +127,7 @@ public final class Constraint {
                         case .bottomMargin:
                             layoutToAttribute = .bottom
                         default:
-                            fatalError()
+                            preconditionFailure()
                         }
                     } else if self.from.attributes == .directionalEdges && self.to.attributes == .directionalMargins {
                       switch layoutFromAttribute {
@@ -140,7 +140,7 @@ public final class Constraint {
                       case .bottom:
                         layoutToAttribute = .bottomMargin
                       default:
-                        fatalError()
+                        preconditionFailure()
                       }
                     } else if self.from.attributes == .directionalMargins && self.to.attributes == .directionalEdges {
                       switch layoutFromAttribute {
@@ -153,7 +153,7 @@ public final class Constraint {
                       case .bottomMargin:
                         layoutToAttribute = .bottom
                       default:
-                        fatalError()
+                        preconditionFailure()
                       }
                     } else if self.from.attributes == self.to.attributes {
                         layoutToAttribute = layoutFromAttribute
@@ -279,13 +279,13 @@ public final class Constraint {
     public func updatePriorityRequired() -> Void {}
 
     @available(*, deprecated, message:"Use update(priority: ConstraintPriorityTarget) instead.")
-    public func updatePriorityHigh() -> Void { fatalError("Must be implemented by Concrete subclass.") }
+    public func updatePriorityHigh() -> Void { preconditionFailure("Must be implemented by Concrete subclass.") }
 
     @available(*, deprecated, message:"Use update(priority: ConstraintPriorityTarget) instead.")
-    public func updatePriorityMedium() -> Void { fatalError("Must be implemented by Concrete subclass.") }
+    public func updatePriorityMedium() -> Void { preconditionFailure("Must be implemented by Concrete subclass.") }
 
     @available(*, deprecated, message:"Use update(priority: ConstraintPriorityTarget) instead.")
-    public func updatePriorityLow() -> Void { fatalError("Must be implemented by Concrete subclass.") }
+    public func updatePriorityLow() -> Void { preconditionFailure("Must be implemented by Concrete subclass.") }
 
     // MARK: Internal
 
@@ -317,7 +317,7 @@ public final class Constraint {
             for layoutConstraint in layoutConstraints {
                 let existingLayoutConstraint = existingLayoutConstraints.first { $0 == layoutConstraint }
                 guard let updateLayoutConstraint = existingLayoutConstraint else {
-                    fatalError("Updated constraint could not find existing matching constraint to update: \(layoutConstraint)")
+                    preconditionFailure("Updated constraint could not find existing matching constraint to update: \(layoutConstraint)")
                 }
 
                 let updateLayoutAttribute = (updateLayoutConstraint.secondAttribute == .notAnAttribute) ? updateLayoutConstraint.firstAttribute : updateLayoutConstraint.secondAttribute
